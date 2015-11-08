@@ -1,0 +1,19 @@
+{% if tasks %}
+	<ul>
+	{% for task in tasks %}
+		{% if task.name != 'root' %}
+		<li>
+			{% if task.done %}
+				<strike>
+			{% endif %}
+			<a href="/taskmanager/{{task.id}}/">{{task.name}}</a>
+			{% if task.done %}
+				</strike>
+			{% endif %}
+		</li>
+		{% endif %}
+	{% endfor %}
+	</ul>
+{% else %}
+	<p> No tasks. Seems that you're a free man </p>
+{% endif %}
