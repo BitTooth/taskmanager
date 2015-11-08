@@ -1,7 +1,14 @@
 {% if task %}
-	<h1> Задача </h1>
-	<p> {{ task }} </p>
-	<h2> Описание </h2>
+	<h3> {{ task }} </h3>
+	<h4> Описание </h4>
 	<p> {{task.description}} </p>
+
+	<h4> Комментарии </h4>
+	<ul>
+		{% for comment in task.comment_set.all %}
+		<li> {{ comment.content}} </li>
+		{% endfor %}
+	</ul>
+
 {% endif %}
 <a href='/taskmanager/'> На главную </a>
