@@ -1,0 +1,45 @@
+body {
+	background-color: #055D82;
+}
+
+li {
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+
+	padding: 5px;
+	padding-left: 25px;
+
+	background-color: #034765;
+	color: #4F8CA6;
+
+	border-radius: 10px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px; 
+	border-width: 3px;
+	border-style: none;
+	border-color: #A3A3A3;
+	list-style: none;
+}
+
+li:hover {
+	background-color: #17A677;
+	color: #006A47;
+	cursor:pointer;
+}
+
+a {
+	background-color: red;
+	font-family: ubuntu;
+	font-size: 16px;
+	text-decoration: none;
+	font-style: normal;
+	display: block;
+	width: 100%;
+	color: #5E5E5E;
+}
+
+a:hover {
+	color: #E0E0E0
+}

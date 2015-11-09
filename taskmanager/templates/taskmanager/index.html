@@ -1,19 +1,28 @@
-{% if tasks %}
-	<ul>
-	{% for task in tasks %}
-		{% if task.name != 'root' %}
-		<li>
-			{% if task.done %}
-				<strike>
-			{% endif %}
-			<a href="/taskmanager/{{task.id}}/">{{task.name}}</a>
-			{% if task.done %}
-				</strike>
-			{% endif %}
-		</li>
+{%load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'taskmanager/style.css'%}" />
+	</head>
+	<body>
+		{% if tasks %}
+			<ul>
+			{% for task in tasks %}
+				{% if task.name != 'root' %}
+				<li onclick="location.href='/taskmanager/{{task.id}}/'">
+					{% if task.done %}
+						<strike>
+					{% endif %}
+					{{task.name}}
+					{% if task.done %}
+						</strike>
+					{% endif %}
+				</li>
+				{% endif %}
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p> No tasks. Seems that you're a free man </p>
 		{% endif %}
-	{% endfor %}
-	</ul>
-{% else %}
-	<p> No tasks. Seems that you're a free man </p>
-{% endif %}
+	</body>
+</html>
