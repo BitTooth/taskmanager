@@ -72,6 +72,11 @@ body {
 	display:inline;
 }
 
+#button:hover {
+	background-color: #012C3F;
+	color: #1C769D;
+}
+
 #done_label, #undone_label {
 	color: green;
 	display: inline;
