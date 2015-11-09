@@ -1,8 +1,19 @@
 body {
-	background-color: #055D82;
+	background-color: #4F8CA6;
 }
 
-li {
+#task_label {
+	display:inline;
+}
+
+#subtask_button {
+	display: inline;
+}
+
+#task_button, #task_container {
+	font-family: ubuntu;
+	font-size: 16px;
+
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-top: 5px;
@@ -10,6 +21,8 @@ li {
 
 	padding: 5px;
 	padding-left: 25px;
+	padding-bottom: 1px;
+	padding-right: 2px;
 
 	background-color: #034765;
 	color: #4F8CA6;
@@ -21,25 +34,97 @@ li {
 	border-style: none;
 	border-color: #A3A3A3;
 	list-style: none;
+
+	display: block;
 }
 
-li:hover {
-	background-color: #17A677;
-	color: #006A47;
+#subtask_container {
+	font-family: ubuntu;
+	font-size: 14px;
+
+	background-color: #4F8CA6;
+	color: #012C3F;
+
+	margin-left: 10px;
+	margin-top: 5px;
+	margin-bottom: 1px;
+
+	padding-left: 15px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	display: block;
+}
+
+#button {
+	border-radius: 3px;
+
+	background-color: #1C769D;
+	color: #012C3F;
+
+	margin-right: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align:right;
+	float: right;
+
+	display:inline;
+}
+
+#done_label, #undone_label {
+	color: green;
+	display: inline;
+	float: right;
+	margin-right: 50px;
+}
+
+#undone_label {
+	color: red;
+}
+
+#button:hover {
 	cursor:pointer;
 }
 
+#task_button:hover {
+	background-color: #006A47;
+	color: #4FAF8F;
+	cursor:pointer;
+}
+
+#task_button:hover #subtask_container {
+	background-color: #4FAF8F;
+}
+
+#task_button:hover #subtask_container:hover {
+	background-color: #00432D;
+	color: #4FAF8F;
+}
+
+#task_button #button,  #subtask_container #button {
+	display: none;
+}
+
+#task_button:hover #button, #subtask_container:hover #button {
+	display: inline;
+}
+
 a {
-	background-color: red;
 	font-family: ubuntu;
 	font-size: 16px;
+
 	text-decoration: none;
+	text-align: center;
 	font-style: normal;
 	display: block;
 	width: 100%;
-	color: #5E5E5E;
+
+	background-color: #034765;
+	color: #4F8CA6;
 }
 
 a:hover {
+	background-color: #012C3F;
 	color: #E0E0E0
 }

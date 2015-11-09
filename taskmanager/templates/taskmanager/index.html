@@ -2,27 +2,35 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<link rel="stylesheet" type="text/css" href="{% static 'taskmanager/style.css'%}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'taskmanager/style.css'%}" />
 	</head>
 	<body>
 		{% if tasks %}
-			<ul>
 			{% for task in tasks %}
-				{% if task.name != 'root' %}
-				<li onclick="location.href='/taskmanager/{{task.id}}/'">
-					{% if task.done %}
-						<strike>
-					{% endif %}
-					{{task.name}}
-					{% if task.done %}
-						</strike>
-					{% endif %}
-				</li>
+				{% if task.parent.name == 'root' %}
+					<div id='task_button'>
+						{% if task.done %} <strike> {% endif %}
+						<div id='task_label' onclick="location.href='/taskmanager/{{task.id}}/'"> {{task.name}} </div>
+						{% if task.done %} </strike> {% endif %}
+
+						<div id='button' onclick='alert("done task")'> Done </div>
+						<div id='button' onclick='alert("new subtask")'> Add subtask </div>
+
+						{% for child in task.task_set.all %}
+							<div id='subtask_container'> 
+								{% if child.done %} <strike> {% endif %}
+								<div id='subtask_button' onclick="location.href='/taskmanager/{{child.id}}/'; ">  {{ child.name }}  </div>
+								{% if child.done %} </strike> {% endif %}
+
+								<div id='button' onclick='alert("done subtask")'> Done </div>
+							</div>
+						{% endfor %}
+					</div>
 				{% endif %}
 			{% endfor %}
-			</ul>
 		{% else %}
 			<p> No tasks. Seems that you're a free man </p>
 		{% endif %}
+		<div id='button' onclick='alert("new task")'> Add new task </div>
 	</body>
 </html>
