@@ -20,12 +20,25 @@
 
 			<h2> Комментарии </h2>
 			{% for comment in task.comment_set.all %}
-				<p> {{ comment.content }} </p>
+				<div id="comment_container">
+					<div id="comment_content"> {{ comment.content }} </div>
+					<div id='button' onclick='location.href="/taskmanager/{{task.id}}/delete_comment/{{comment.id}}"'>[X]</div>
+				</div>
 			{% endfor %}
+
+			<div>
+				<form id='form' action="{% url 'add_comment' task.id %}" method="post">
+					{% csrf_token %}
+					<label>Новый комментарий</label>
+					<!-- input id="comment_text" type="textarea" rows='10' name="content"/> -->
+					<textarea id="comment_text" name="content" rows='6' cols='80'></textarea>
+					<input id="submit_button" type="submit" value="Добавить">
+				</form>
+			</div>
 		{% endif %}
 	</div>
 	<div id='button' onclick='location.href="/taskmanager/";'> На главную </div>
-	<div id='button' onclick='alert("add comment");'> Добавить комментарий </div>
+	<!-- <div id='button' onclick='location.href="/taskmanager/{{task.id}}/add_comment/";'> Добавить комментарий </div> -->
 </body>
 
 </html>

@@ -13,7 +13,16 @@ body {
 	display: inline;
 }
 
-#task_button, #task_container {
+#comment_content {
+	display: inline;
+}
+
+#form {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#task_button, #task_container, #comment_container {
 	font-family: ubuntu;
 	font-size: 16px;
 
@@ -67,12 +76,23 @@ body {
 	color: #012C3F;
 
 	margin-right: 10px;
+	margin-bottom: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
 	text-align:right;
 	float: right;
 
 	display:inline;
+}
+
+#comment_text {
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#submit_button {
+	display: block;
 }
 
 #button:hover {
