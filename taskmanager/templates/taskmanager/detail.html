@@ -1,14 +1,44 @@
-{% if task %}
-	<h3> {{ task }} </h3>
-	<h4> Описание </h4>
-	<p> {{task.description}} </p>
+{%load staticfiles %}
+<!DOCTYPE html>
 
-	<h4> Комментарии </h4>
-	<ul>
-		{% for comment in task.comment_set.all %}
-		<li> {{ comment.content}} </li>
-		{% endfor %}
-	</ul>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'taskmanager/style.css'%}" />
+</head>
 
-{% endif %}
-<a href='/taskmanager/'> На главную </a>
+<body>
+	<div id='task_container'>
+		{% if task %}
+			<h1> 
+				<div id='task_label'> {{ task }} </div>
+				{% if task.done%} <div id='done_label'> Done </div>
+				{% else %} <div id='undone_label'> Not done </div> {% endif %}
+			</h1>
+
+			<h2> Описание </h2>
+			<p> {{task.description}} </p>
+
+			<h2> Комментарии </h2>
+			{% for comment in task.comment_set.all %}
+				<div id="comment_container">
+					<div id="comment_content"> {{ comment.content }} </div>
+					<div id='button' onclick='location.href="/taskmanager/{{task.id}}/delete_comment/{{comment.id}}"'>[X]</div>
+				</div>
+			{% endfor %}
+
+			<div>
+				<form id='form' action="{% url 'add_comment' task.id %}" method="post">
+					{% csrf_token %}
+					<label>Новый комментарий</label>
+					<!-- input id="comment_text" type="textarea" rows='10' name="content"/> -->
+					<textarea id="comment_text" name="content" rows='6' cols='80'></textarea>
+					<input id="submit_button" type="submit" value="Добавить">
+				</form>
+			</div>
+		{% endif %}
+	</div>
+	<div id='button' onclick='location.href="/taskmanager/";'> На главную </div>
+	<!-- <div id='button' onclick='location.href="/taskmanager/{{task.id}}/add_comment/";'> Добавить комментарий </div> -->
+</body>
+
+</html>
