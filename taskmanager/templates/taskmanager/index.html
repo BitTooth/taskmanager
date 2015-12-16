@@ -8,15 +8,15 @@
 		{% if tasks %}
 			{% for task in tasks %}
 				{% if task.parent.name == 'root' %}
-					<div id='task_button'>
+					<div id='task_button' {% if task.done %} id='task_done' {% endif %}>
 						{% if task.done %} <strike> {% endif %}
 						<div id='task_label' onclick="location.href='/taskmanager/{{task.id}}/'"> {{task.name}} </div>
 						{% if task.done %} </strike> {% endif %}
 
-						<div id='button' onclick='location.href="/taskmanager/task_done/{{task.id}}"'> Done </div>
+						<div id='button' onclick='location.href="/taskmanager/task_done/{{task.id}}/"'> Done </div>
 
 						{% if not task.done %}
-							<div id='button' onclick='alert("new subtask")'> Add subtask </div>
+							<div id='button' onclick="location.href='/taskmanager/new_task/{{task.id}}/'"> Add subtask </div>
 
 							{% for child in task.task_set.all %}
 								<div id='subtask_container'> 
@@ -24,7 +24,7 @@
 									<div id='subtask_button' onclick="location.href='/taskmanager/{{child.id}}/'; ">  {{ child.name }}  </div>
 									{% if child.done %} </strike> {% endif %}
 
-									<div id='button' onclick='location.href="/taskmanager/task_done/{{child.id}}"'> Done </div>
+									<div id='button' onclick='location.href="/taskmanager/task_done/{{child.id}}/"'> Done </div>
 								</div>
 							{% endfor %}
 						{% endif %}
@@ -34,6 +34,6 @@
 		{% else %}
 			<p> No tasks. Seems that you're a free man </p>
 		{% endif %}
-		<div id='button' onclick='alert("new task")'> Add new task </div>
+		<div id='button' onclick="location.href='/taskmanager/new_task/1/'"> Add new task </div>
 	</body>
 </html>

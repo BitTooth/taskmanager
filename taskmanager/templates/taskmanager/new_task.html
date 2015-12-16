@@ -1,0 +1,31 @@
+{%load staticfiles %}
+<!DOCTYPE html>
+
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'taskmanager/style.css'%}" />
+</head>
+
+<body>
+	<div id='task_container'>
+		{% if task %}
+			{% if task.name == 'root' %}
+				<div id='task_label'> Добавление новой задачи </div>
+			{% else %}
+				<div id='task_label'> Добавление подзадачи к задаче {{task.name}} </div>
+			{% endif %}
+
+			<div>
+				<form id='form' action="{% url 'add_task' task.id %}" method="post">
+					{% csrf_token %}
+					<label>Название задачи</label>
+					<input id="comment_text" type="textarea" name="name"/>
+					<textarea id="comment_text" name="content" rows='6' cols='80'></textarea>
+					<input id="submit_button" type="submit" value="Добавить">
+				</form>
+			</div>
+		{% endif %}
+	</div>
+</body>
+
+</html>

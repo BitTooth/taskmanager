@@ -4,6 +4,26 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="{% static 'taskmanager/style.css'%}" />
+	<script>
+		var edit = false;
+
+		function switchEdit(id, edit_id) 
+		{
+			if (!edit)
+			{
+				document.getElementById(id).style.display="none";
+				document.getElementById(edit_id).style.display="block";
+				document.getElementById("comment_text").innerHTML = document.getElementById(id).innerHTML;
+				edit = true;
+			}
+			else
+			{
+				document.getElementById(id).style.display="block";
+				document.getElementById(edit_id).style.display="none";
+				edit = false;
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -15,8 +35,24 @@
 				{% else %} <div id='undone_label'> Not done </div> {% endif %}
 			</h1>
 
-			<h2> Описание </h2>
-			<p> {{task.description}} </p>
+			<div id='section_label'> 
+				<h2 id='task_label'> Описание </h2> 
+				<div 	id='left_button' 
+						onclick='switchEdit("description", "description_edit")'
+				> 
+						<img src='/taskmanager/edit_16x16.gif' alt='edit'/>
+				</div> 
+			</div>
+
+			<p id='description'> {{task.description}} </p>
+
+			<div id='description_edit'>
+				<form if='form', action="{% url 'edit_description' task.id %}" method="post">
+					{% csrf_token %}
+					<textarea id="comment_text" type="textarea" name="name" cols='80'> My text </textarea>
+					<input id="submit_button" type="submit" value="Сохранить">
+				</form>
+			</div>
 
 			<h2> Комментарии </h2>
 			{% for comment in task.comment_set.all %}
